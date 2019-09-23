@@ -31,10 +31,6 @@ oreg_auth_password=<rhel_subscription_password>
 
 osm_default_subdomain=apps.preferred.subdomain.com
 
-osm_use_cockpit=true
-osm_cockpit_plugins=['cockpit-kubernetes']
-openshift_metrics_install_metrics=true
-
 openshift_master_dynamic_provisioning_enabled=true
 
 debug_level=5
@@ -61,13 +57,8 @@ htpasswd -cb /etc/origin/master/htpasswd admin <strong_password>  # EDIT
 
 # Add cluster roles to admin
 oc login -u system:admin
-oc adm policy add-cluster-role-to-user cluster-monitoring-view admin
+oc adm policy add-cluster-role-to-user cluster-admin admin
 oc adm policy add-cluster-role-to-user storage-admin admin
-
-# Install Cockpit
-yum -y install cockpit cockpit-kubernetes cockpit-dashboard
-systemctl enable cockpit.socket
-systemctl start cockpit.socket
 
 # Create NFS export
 lvcreate -L 30G -n export rhel
