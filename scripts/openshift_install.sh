@@ -69,3 +69,6 @@ cat << EOF >> /etc/exports
 /export
 EOF
 systemctl restart nfs-server
+
+# Open firewall for RMC
+iptables -A INPUT -i eth0 -p tcp --dport 657 -j ACCEPT
